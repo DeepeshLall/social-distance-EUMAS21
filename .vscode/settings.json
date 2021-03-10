@@ -1,0 +1,23 @@
+{
+    // vscode
+    "editor.detectIndentation": true,
+    "editor.formatOnPaste": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "files.insertFinalNewline": true,
+
+    // only for python language files
+    "[python]": {
+        "editor.rulers": [
+            500,
+            500
+        ],
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+
+    // pythonVSCode extension
+    "python.pythonPath": "/usr/bin/python3",
+    "python.envFile": ".env",
+    "python.languageServer": "Microsoft"
+}
