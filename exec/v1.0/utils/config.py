@@ -4,12 +4,12 @@
 # numberOfSlots = 25
 # max_slotCapacity = 15
 
-numberOfAgents = 10
-numberOfSlots = 16
-max_slotCapacity = 5
+numberOfAgents = 5
+numberOfSlots = 4
+max_slotCapacity = 3
 
 # Max demand -- can be equal to numberOfSlots(max) and 1(min) and is semi-inclusive set i.e. [a,a+D)
-max_Demand = 4
+max_Demand = 3
 
 # Urgency = 1 (Less urgent), 2 (Medium urgent), 3 (Extremly urgent)
 numberOfUrgency = 3

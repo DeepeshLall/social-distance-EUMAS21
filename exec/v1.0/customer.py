@@ -3,9 +3,6 @@
 from utils.header import *
 
 class Person():
-    """
-    This class's instance create a person and contain respective public method.
-    """
     def __init__(self):
         self.pid = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k = 5))
         self.allocatedSlot_start_idx = -1
