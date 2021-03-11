@@ -15,15 +15,17 @@ class Shop():
         for _ in range(numberOfSlots):
             self.perSlotPeople.append([])
     
-    def bookSlot(self, customer, Slot_entry, Slot_exit):
+    def bookSlot(self, customer, Slot_entry, Slot_exit, Price):
+        customer.allocatedSlot_start_idx = Slot_entry
+        customer.delay = Price
         for slot_idx in range(Slot_entry, Slot_exit+1):
-            self.slotState[slot_idx] -= 1
+            self.slotCapacity[slot_idx] -= 1
             self.perSlotPeople[slot_idx].append(customer)
         return
 
     def isFree(self, slotEntry_idx, slotExit_idx):
         for slot_idx in range(slotEntry_idx, slotExit_idx+1):
-            if self.slotState[slot_idx] == 0:
+            if self.slotCapacity[slot_idx] == 0:
                 return False
         return True
 
