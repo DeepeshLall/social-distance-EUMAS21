@@ -1,7 +1,7 @@
 #!/bin/bash
 
 numberOfAgents=$1
-max_numberOfSlots=$2
+# max_numberOfSlots=$2
 slotCapacity=$3
 
 Cdump="data/customers/dump/N${numberOfAgents}_M"

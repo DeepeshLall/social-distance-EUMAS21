@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Default mode = 1 
+# Default mode = 1 -- if 2 then readMode of prev. data for given 3 cmdline parameters.
 dataLoadMode=1
 numberOfAgents=$1
 max_numberOfSlots=$2
