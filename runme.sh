@@ -6,7 +6,7 @@ numberOfAgents=$1
 max_numberOfSlots=$2
 slotCapacity=$3
 
-for m in $(seq 2 "$max_numberOfSlots");
+for m in $(seq 3 "$max_numberOfSlots");
 do
     total_iter=$((10*"$m"));
     for iter in $(seq 1 "$total_iter");

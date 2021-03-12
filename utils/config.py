@@ -14,7 +14,7 @@ numberOfSlots = int(sys.argv[3])
 max_slotCapacity = int(sys.argv[4])
 
 # Max demand -- can be equal to numberOfSlots(max) and 1(min) and is semi-inclusive set i.e. [a,a+D)
-max_Demand = 3
+max_Demand = numberOfSlots
 
 # Urgency = 1 (Less urgent), 2 (Medium urgent), 3 (Extremly urgent)
 numberOfUrgency = 3
@@ -26,3 +26,5 @@ shopSlotPreferenceDecayFactor = 0.10
 scaleFactor = 1000
 
 numberOfShops = 1
+
+toolbar_width = 40

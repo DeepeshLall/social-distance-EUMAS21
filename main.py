@@ -64,11 +64,6 @@ all_entry_profile = itertools.product(*all_entry_list)
 all_valuation_profile = itertools.product(*all_valuation_list)
 print("Generated generator of permutation for valuation profile ...")
 
-print("Computing total number of iterations ...")
-all_valuation_profile, all_valuation_profile_length = itertools.tee(all_valuation_profile, 2)
-exp_length = sum(1 for _ in all_valuation_profile_length)
-print("Computed total number of iterations ...")
-
 opt_val = 0
 opt_A = []
 opt_profile = []
@@ -76,7 +71,13 @@ opt_entry = []
 print("Starting computation for each profile ...")
 start_opt = time.time()
 idx = -1
+# setup toolbar
+sys.stdout.write("In Progress [%s]" % (" " * toolbar_width))
+sys.stdout.flush()
+# return to start of line, after '['
+sys.stdout.write("\b" * (toolbar_width+1))
 for valuation_profile in all_valuation_profile:
+    time.sleep(0.1)
     idx += 1
     try:
         entry_profile = next(all_entry_profile)
@@ -102,12 +103,10 @@ for valuation_profile in all_valuation_profile:
         if slotOccupancy > shop.max_slotCapacity:
             isValid = False
             break
-    print_str = "#"*int(idx/(exp_length-1)*100)
     if not isValid:
-        if not idx == exp_length-1:
-            print("[ Competed "+str(int(idx/(exp_length-1)*100))+"% ] "+print_str, end="\r")
-        else:
-            print("[ Competed "+str(int(idx/(exp_length-1)*100))+"% ] "+print_str)
+        # update the bar
+        sys.stdout.write("-")
+        sys.stdout.flush()
         continue
     
     # Check and update optimal
@@ -117,12 +116,11 @@ for valuation_profile in all_valuation_profile:
         opt_A = A
         opt_profile = valuation_profile
         opt_entry = entry_profile
+    # update the bar
+    sys.stdout.write("-")
+    sys.stdout.flush()
 
-    if not idx == exp_length-1:
-        print("[ Competed "+str(int(idx/(exp_length-1)*100))+"% ] "+print_str, end="\r")
-    else:
-        print("[ Competed "+str(int(idx/(exp_length-1)*100))+"% ] "+print_str)
-
+sys.stdout.write("]\n")  # this ends the progress bar
 end_opt = time.time()
 time_opt = end_opt - start_opt
 print("Completed the OPT-profile allocation computation ...", end="\n")
