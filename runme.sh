@@ -11,7 +11,10 @@ do
     total_iter=$((10*"$m"));
     for iter in $(seq 1 "$total_iter");
     do 
-        echo "SLOT NUMBER MAX =${m}, ITERATION NO.=${iter}";
+        echo "======= STARTING SLOT NUMBER MAX =${m}, ITERATION NO.=${iter} =======";
         python3 main.py "$dataLoadMode" "$numberOfAgents" "$m" "$slotCapacity";
+        echo "";
+        echo "";
     done
+    # Script to update Plot
 done
