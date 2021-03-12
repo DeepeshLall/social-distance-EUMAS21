@@ -54,7 +54,7 @@ for person in customers:
     v_profile = [0]
     entry_idx = [-1]
     v_profile.extend(person.cummulativeValuation)
-    entry_idx.extend(range(numberOfSlots-person.demand))
+    entry_idx.extend(range(numberOfSlots-person.demand+1))
     all_valuation_list.append(v_profile)
     all_entry_list.append(entry_idx)
 
@@ -62,6 +62,7 @@ print("Generating generator of permutation for valuation profile ...", end="\r")
 # It will he of exponential order length
 all_entry_profile = itertools.product(*all_entry_list)
 all_valuation_profile = itertools.product(*all_valuation_list)
+iter_list = zip(all_valuation_profile, all_entry_profile)
 print("Generated generator of permutation for valuation profile ...")
 
 opt_val = 0
@@ -69,18 +70,17 @@ opt_A = []
 opt_profile = []
 opt_entry = []
 print("Starting computation for each profile ...")
-start_opt = time.time()
-idx = -1
 # setup toolbar
 sys.stdout.write("In Progress [%s]" % (" " * toolbar_width))
 sys.stdout.flush()
 # return to start of line, after '['
 sys.stdout.write("\b" * (toolbar_width+1))
-for valuation_profile in all_valuation_profile:
-    time.sleep(0.1)
-    idx += 1
+
+start_opt = time.process_time()
+for iter_profile in iter_list:
     try:
-        entry_profile = next(all_entry_profile)
+        valuation_profile = iter_profile[0]
+        entry_profile = iter_profile[1]
     except StopIteration:
         break
     # Construct corresponding A matrix -- allocation matrix
@@ -121,16 +121,9 @@ for valuation_profile in all_valuation_profile:
     sys.stdout.flush()
 
 sys.stdout.write("]\n")  # this ends the progress bar
-end_opt = time.time()
+end_opt = time.process_time()
 time_opt = end_opt - start_opt
 print("Completed the OPT-profile allocation computation ...", end="\n")
-# Final Results of OPT-allocation
-
-# print(opt_A)
-# print(opt_val)
-# print(opt_profile)
-# print(opt_entry)
-
 
 # Implementing Aprox. Algorithm
 
@@ -163,7 +156,7 @@ P_0 = [v_max/(6*numberOfSlots*(max_slotCapacity-1))] * numberOfSlots
 print("Parameters Initialized ...")
 
 print("Allocating all customers iteratively...", end = "\r")
-start_aprox = time.time()
+start_aprox = time.process_time()
 # Iterate and allocate to all customers
 A = []
 entry_list = []
@@ -189,8 +182,8 @@ for person in customers:
         entry_list.append(entry_idx)
         delay_list.append(v_max__person)
     shop.bookSlot(person, entry_idx, entry_idx+person.demand-1, delay_list[-1])
-end_aprox = time.time()
-time_aprox = time.time()
+end_aprox = time.process_time()
+time_aprox = end_aprox - start_aprox
 print("Completed APROX-profile allocation computation ...", end="\n")
 
 alg_val = 0
@@ -205,14 +198,8 @@ for person in customers:
     alg_profile.append(person.cummulativeValuation[person.allocatedSlot_start_idx])
     alg_entry.append(person.allocatedSlot_start_idx)
 
-# Final Results of APROX-allocation
-
-# print(A)
-# print(alg_val)
-# print(alg_profile)
-# print(alg_entry)
-
 # Append the output to the csv
+
 print("Appending the measured metrics to results/{val,time}/csv/N"+str(numberOfAgents)+"_K"+str(max_slotCapacity)+".csv")
 
 with open("results/time/csv/N"+str(numberOfAgents)+"_K"+str(max_slotCapacity)+".csv","a") as time_csv_handler:

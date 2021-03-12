@@ -8,10 +8,10 @@ slotCapacity=$3
 
 for m in $(seq 3 "$max_numberOfSlots");
 do
-    total_iter=$((10*"$m"));
+    total_iter=$((1*"$m"));
     for iter in $(seq 1 "$total_iter");
     do 
-        echo "======= STARTING SLOT NUMBER MAX =${m}, ITERATION NO.=${iter} =======";
+        echo "======= STARTING SLOT NUMBER MAX = ${m}, ITERATION NUMBER = ${iter} =======";
         python3 main.py "$dataLoadMode" "$numberOfAgents" "$m" "$slotCapacity";
         echo "";
         echo "";
