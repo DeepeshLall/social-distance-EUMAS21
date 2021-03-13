@@ -8,7 +8,7 @@ slotCapacity=$3
 
 for m in $(seq 3 "$max_numberOfSlots");
 do
-    total_iter=$((1*"$m"));
+    total_iter=$((10*"$m"));
     for iter in $(seq 1 "$total_iter");
     do 
         echo "======= STARTING SLOT NUMBER MAX = ${m}, ITERATION NUMBER = ${iter} =======";
@@ -17,4 +17,7 @@ do
         echo "";
     done
     # Script to update Plot
+    echo "Ploting dynamically ..."
+    python3 "results/time/plotter.py" "results/time/csv/N${numberOfAgents}_K${slotCapacity}.csv"
+    python3 "results/val/plotter.py" "results/val/csv/N${numberOfAgents}_K${slotCapacity}.csv"
 done

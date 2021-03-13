@@ -203,7 +203,7 @@ for person in customers:
 print("Appending the measured metrics to results/{val,time}/csv/N"+str(numberOfAgents)+"_K"+str(max_slotCapacity)+".csv")
 
 with open("results/time/csv/N"+str(numberOfAgents)+"_K"+str(max_slotCapacity)+".csv","a") as time_csv_handler:
-    time_csv_handler.write(str(time_opt)+","+str(time_aprox)+"\n")
+    time_csv_handler.write(str(numberOfSlots)+","+str(time_opt)+","+str(time_aprox)+"\n")
 
 with open("results/val/csv/N"+str(numberOfAgents)+"_K"+str(max_slotCapacity)+".csv", "a") as val_csv_handler:
-    val_csv_handler.write(str(opt_val)+","+str(alg_val)+"\n")
+    val_csv_handler.write(str(numberOfSlots)+","+str(opt_val)+","+str(alg_val)+"\n")
