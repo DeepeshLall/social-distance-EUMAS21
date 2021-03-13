@@ -56,7 +56,7 @@ plt.plot(xticks, alg, '-', color='orange', label='Approximate')
 plt.fill_between(xticks, alg - alg_std, alg +
                  alg_std, color='orange', alpha=0.3)
 plt.xlabel('slots')
-plt.ylabel('Social Wellfare')
+plt.ylabel('Time (sec)')
 plt.title('Time vs number of slots')
 plt.legend(loc='upper left')
 plt.grid()
