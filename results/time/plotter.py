@@ -15,7 +15,7 @@ file_name = sys.argv[1]
 rel_addr = ""
 if len(file_name.split(".csv")[0].split("/")) > 1:
     rel_addr = file_name.split("csv/"+file_name.split(".csv")[0].split("/")[-1] + ".csv")[0]
-output_file = rel_addr + "plots/" + file_name.split(".csv")[0].split("/")[-1] + ".png"
+output_file = rel_addr + "plots/" + file_name.split(".csv")[0].split("/")[-1] + "_1.png"
 
 opt_tmp = []
 alg_tmp = []
